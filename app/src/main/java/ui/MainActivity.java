@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
        TextView myText = variableBinding.mytext;
        EditText myEdit = variableBinding.myedittext;
        CheckBox check = variableBinding.mycheck;
-       Switch switch1 = variableBinding.myswitch;
+       Switch myswitch = variableBinding.myswitch;
        RadioButton radioButton = variableBinding.myradio;
        ImageButton imageButton = variableBinding.myimagebutton;
 
@@ -50,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
            else{
                Toast.makeText(getApplicationContext(),"Checkbox is unchecked", Toast.LENGTH_SHORT).show();
            }
+        });
+
+        myswitch.setOnCheckedChangeListener((sw, isChecked) ->{
+            if(myswitch.isChecked()){
+                Toast.makeText(getApplicationContext(),"Switched on", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Switched off", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        radioButton.setOnClickListener(click ->{
+            Toast.makeText(getApplicationContext(),"Radio button clicked", Toast.LENGTH_SHORT).show();
+        });
+
+        imageButton.setOnClickListener(click ->{
+            Toast.makeText(getApplicationContext(),"The width is: " + imageButton.getMeasuredWidth() +
+                    "The height is: " + imageButton.getMeasuredHeight(), Toast.LENGTH_SHORT).show();
         });
     }
 }

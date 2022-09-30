@@ -15,18 +15,16 @@
         />
 
     <Button
+        android:id="@+id/mybutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="@string/button_message"
-        android:id="@+id/mybutton"
-        />
+        android:text="@string/button_message" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/myedittext"
-        android:text="@string/editmessage"
         android:hint="@string/hinttext"
         />
 
@@ -34,16 +32,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mycheck"
+        android:text="@string/checkbox"
         />
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/myradio"
+        android:text="@string/radio"
         />
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/myswitch"
+        android:text="@string/switcher"
         />
 
     <ImageView
@@ -56,7 +57,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_algonquin"
+        android:src="@drawable/gmail_logo"
         android:id="@+id/myimagebutton"
         />
 

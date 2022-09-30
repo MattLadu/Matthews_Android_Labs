@@ -5,4 +5,7 @@
     <string name="button_message">je suis un bouton</string>
     <string name="editmessage">Je suis un editeur de texte</string>
     <string name="hinttext">Écris quelque chose içi</string>
+    <string name="radio">Je suis un button radio</string>
+    <string name="checkbox">"Je suis une boite "</string>
+    <string name="switcher">Je suis un switch</string>
 </resources>
