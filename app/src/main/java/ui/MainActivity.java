@@ -40,24 +40,43 @@ public class MainActivity extends AppCompatActivity {
 
         variableBinding.mybutton.setOnClickListener(click ->{
             String editString = myEdit.getText().toString();
-            variableBinding.mytext.setText("Textview set to: " + editString);
+            model.editString.postValue(editString);
+          });
+        model.editString.observe(this, newStringValue ->{
+            variableBinding.mytext.setText("Textview set to: " + newStringValue);
         });
 
-        check.setOnClickListener(click -> {
-           if (check.isChecked()){
-               Toast.makeText(getApplicationContext(),"Checkbox is checked",Toast.LENGTH_SHORT).show();
-           }
-           else{
-               Toast.makeText(getApplicationContext(),"Checkbox is unchecked", Toast.LENGTH_SHORT).show();
-           }
+        model.isChecked.observe(this, selected -> {
+            variableBinding.mycheck.setChecked(selected);
+        variableBinding.myradio.setChecked(selected);
+        variableBinding.myswitch.setChecked(selected);
+        } ) ;
+
+        check.setOnCheckedChangeListener((chk, isChecked )->{
+            model.isChecked.postValue(isChecked);
+        });
+
+        radioButton.setOnCheckedChangeListener((rb, isChecked )->{
+            model.isChecked.postValue(isChecked);
         });
 
         myswitch.setOnCheckedChangeListener((sw, isChecked) ->{
             if(myswitch.isChecked()){
+                model.isChecked.postValue(isChecked);
                 Toast.makeText(getApplicationContext(),"Switched on", Toast.LENGTH_SHORT).show();
             }
             else{
+                model.isChecked.postValue(isChecked);
                 Toast.makeText(getApplicationContext(),"Switched off", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        check.setOnClickListener(click -> {
+            if (check.isChecked()){
+                Toast.makeText(getApplicationContext(),"Checkbox is checked",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Checkbox is unchecked", Toast.LENGTH_SHORT).show();
             }
         });
 
