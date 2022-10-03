@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         sw = findViewById(R.id.switch_spin);
 
         sw.setOnCheckedChangeListener((btn, isChecked)->{
-            if (isChecked) {
-
-                RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,0.5f);
-                rotate.setDuration(3000);
+            if (isChecked)
+            {
+                RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotate.setDuration(5000);
                 rotate.setRepeatCount(Animation.INFINITE);
                 rotate.setInterpolator(new LinearInterpolator());
 
