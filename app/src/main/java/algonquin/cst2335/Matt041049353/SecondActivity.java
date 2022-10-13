@@ -35,8 +35,10 @@ public class SecondActivity extends AppCompatActivity {
         Button call = findViewById(R.id.callNumnber);
         EditText pNumber = findViewById(R.id.editNumber);
         Intent calling = new Intent(Intent.ACTION_DIAL);
-        calling.setData(Uri.parse("tel:" + pNumber));
+
         call.setOnClickListener( clk ->{
+            String phoneNumber = pNumber.getText().toString();
+            calling.setData(Uri.parse("tel:" + phoneNumber));
             startActivity(calling);
         });
 
@@ -44,26 +46,23 @@ public class SecondActivity extends AppCompatActivity {
         Button changePic = findViewById(R.id.changePictureButton);
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+        ActivityResultLauncher<Intent> cameraResult = registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            Bitmap thumbnail = data.getParcelableExtra("data");
+                            pic.setImageBitmap( thumbnail );
 
-        changePic.setOnClickListener( clk ->{
-            ActivityResultLauncher<Intent> cameraResult = registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
-                    new ActivityResultCallback<ActivityResult>() {
-                        @Override
-                        public void onActivityResult(ActivityResult result) {
-                            if (result.getResultCode() == Activity.RESULT_OK) {
-                                Intent data = result.getData();
-                                Bitmap thumbnail = data.getParcelableExtra("data");
-                                pic.setImageBitmap( thumbnail );
-
-                            }
                         }
                     }
-            );
+                }
+        );
+
+        changePic.setOnClickListener( clk ->{
             cameraResult.launch(cameraIntent);
-            startActivity(cameraIntent);
         });
-
-
 
     }
 
