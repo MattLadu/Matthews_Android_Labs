@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import algonquin.cst2335.Matt041049353.databinding.ActivityChatRoomBinding;
+import algonquin.cst2335.Matt041049353.databinding.RecieveMessageBinding;
 import algonquin.cst2335.Matt041049353.databinding.SentMessageBinding;
 
 public class ChatRoom extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class ChatRoom extends AppCompatActivity {
     ArrayList<String> messages = new ArrayList<>();
     private RecyclerView.Adapter myAdapter;
     ChatRoomViewModel chatModel;
+
+
 
     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
     String currentDateandTime = sdf.format(new Date());
@@ -48,12 +51,24 @@ public class ChatRoom extends AppCompatActivity {
             binding.textInput.setText("");
         });
 
+        binding.recieveButton.setOnClickListener(click -> {
+            messages.add(binding.textInput.getText().toString());
+            myAdapter.notifyItemInserted(messages.size()-1);
+            binding.textInput.setText("");
+        });
+
         binding.RecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
-                return new MyRowHolder(binding.getRoot());
+                if (viewType == 0) {
+                    SentMessageBinding binding1 = SentMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder( binding.getRoot());
+                } else {
+                    RecieveMessageBinding binding2 = RecieveMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(binding.getRoot());
+                }
+
             }
 
             @Override
@@ -69,7 +84,9 @@ public class ChatRoom extends AppCompatActivity {
             }
             @Override
             public int getItemViewType(int position){
-                return 0;
+
+                String obj = messages.get(position);
+                return obj.getIsSentButton() ? 0 : 1;
             }
         });
 
