@@ -6,22 +6,22 @@ public class ChatMessage {
     String timeSent;
     boolean isSentButton;
 
-    void ChatRoom(String m, String t, boolean sent)
+    public ChatMessage(String m, String t, boolean sent)
     {
         message = m;
         timeSent = t;
         isSentButton = sent;
     }
 
-    public String getMessage(String message){
-        return this.message;
+    public String getMessage(){
+        return message;
     }
 
-    public String getTime(String timeSent){
-        return this.timeSent;
+    public String getTime(){
+        return timeSent;
     }
 
-    public boolean getIsSent(boolean isSentButton){
-        return this.isSentButton;
+    public boolean getIsSent(){
+        return isSentButton;
     }
 }
