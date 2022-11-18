@@ -86,17 +86,20 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                holder.messageText.setText("");
-                holder.timeText.setText("");
+                ChatMessage obj = messages.get(position);
+                holder.messageText.setText(obj.getMessage());
+                holder.timeText.setText(obj.getTime());
             }
 
             @Override
             public int getItemCount() {
                 return messages.size();
             }
+
             @Override
             public int getItemViewType(int position){
-                return 0;
+                ChatMessage obj = messages.get(position);
+                return obj.getIsSent() ? 0 : 1;
             }
         });
 
