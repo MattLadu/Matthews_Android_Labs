@@ -86,7 +86,7 @@ public class ChatRoom extends AppCompatActivity {
             public int getItemViewType(int position){
 
                 String obj = messages.get(position);
-                return obj.getIsSentButton() ? 0 : 1;
+                return obj.getIsSent() ? 0 : 1;
             }
         });
 
