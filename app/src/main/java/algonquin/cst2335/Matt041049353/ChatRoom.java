@@ -76,10 +76,10 @@ public class ChatRoom extends AppCompatActivity {
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 if(viewType == 0){
-                    SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
+                    SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater(),parent, false );
                     return new MyRowHolder(binding.getRoot());
                 } else{
-                    RecieveMessageBinding binding = RecieveMessageBinding.inflate(getLayoutInflater());
+                    RecieveMessageBinding binding = RecieveMessageBinding.inflate(getLayoutInflater(), parent, false);
                     return new MyRowHolder(binding.getRoot());
                 }
             }
