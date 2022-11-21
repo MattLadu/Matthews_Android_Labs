@@ -2,6 +2,8 @@ package algonquin.cst2335.Matt041049353;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +43,7 @@ public class ChatRoom extends AppCompatActivity {
         messages = chatModel.messages.getValue();
         binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
         mDA0 = db.cmDAO();
@@ -116,7 +119,13 @@ public class ChatRoom extends AppCompatActivity {
 
         binding.RecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
+            tx.replace(R.id.fragmentLocation, chatFragment);
+            tx.commit();
+        });
 
     }
 
@@ -128,6 +137,15 @@ public class ChatRoom extends AppCompatActivity {
             super(itemView);
 
             itemView.setOnClickListener(click -> {
+
+                int position = getAbsoluteAdapterPosition();
+                ChatMessage selected = messages.get(position);
+
+                chatModel.selectedMessage.postValue(selected);
+
+
+
+                /*
                 int position = getAbsoluteAdapterPosition();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
@@ -152,7 +170,7 @@ public class ChatRoom extends AppCompatActivity {
                                    .show();
                 })
                        .create().show();
-
+                */
             });
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
