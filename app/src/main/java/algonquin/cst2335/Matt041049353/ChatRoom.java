@@ -75,12 +75,13 @@ public class ChatRoom extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
             String currentDateandTime = sdf.format(new Date());
 
-            ChatMessage cm = new ChatMessage(input,currentDateandTime,true);
+            ChatMessage cm = new ChatMessage(input,currentDateandTime,false);
             messages.add(cm);
 
             myAdapter.notifyItemInserted(messages.size()-1);
             binding.textInput.setText("");
         });
+
 
         binding.RecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
