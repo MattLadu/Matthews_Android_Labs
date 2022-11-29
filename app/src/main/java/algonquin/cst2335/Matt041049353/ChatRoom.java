@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.snackbar.Snackbar;
 
 
+import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -186,7 +187,9 @@ public class ChatRoom extends AppCompatActivity {
             FragmentTransaction tx = fMgr.beginTransaction();
             MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
             tx.replace(R.id.fragmentLocation, chatFragment);
+            tx.addToBackStack("");
             tx.commit();
+
         });
 
         setSupportActionBar(binding.myToolbar);
@@ -195,6 +198,9 @@ public class ChatRoom extends AppCompatActivity {
 
     class MyRowHolder extends RecyclerView.ViewHolder {
 
+
+        public TextView messageText;
+        public TextView timeText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
@@ -207,9 +213,8 @@ public class ChatRoom extends AppCompatActivity {
                 chatModel.selectedMessage.postValue(selected);
 
             });
-
-            TextView messageText;
-            TextView timeText;
+            messageText = itemView.findViewById(R.id.message);
+            timeText = itemView.findViewById(R.id.time);
 
         }
     }
